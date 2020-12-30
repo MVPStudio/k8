@@ -13,16 +13,69 @@ without help from Continu. To this end we also have a simple [WireGuard](https:/
 # The WireGuard VPN
 
 To access the [WireGuard](https://www.wireguard.com/) VPN users must first [install
-WireGuard](https://www.wireguard.com/install/). Users then use WireGuard to generate a public and a private key. Keys
-can be generated [as per the docs](https://www.wireguard.com/quickstart/#key-generation) though Windows and OSX clients
-also have GUI ways to do this (TODO: users of these platforms please add details and screen shots).
+WireGuard](https://www.wireguard.com/install/). 
 
-## Windows Client
-Once installed, you can add a new tunnel and create public/private keys by creating a new tunnel. 
+Setting up WireGuard for a user consists of the following steps
+
+1. Select a unique IP address for the user
+2. Have the user generate a public/private key pair
+3. Install the user on the server
+4. Have the user create a client configuration
+5. Have the user test their connection to the server
+
+How the user does some of these steps depends on whether they are using the command-line or GUI version of WireGuard. 
+
+## 1. Select a unique IP address for the user
+
+NOTE: Steps 1 and 2 can take place in parallel. 
+
+Figure out what the next free IP address is by looking at [the server config file](../ansible/templates/wg0.conf). Note 
+that each user has a different number for the `AllowedIPs` line between `100.65.0.` and `/32`. Look at the number for 
+the last user in the list, and increment that number to select the user's IP address. Send the user this IP address so 
+they can create their configuration. 
+
+## 2. Have the user generate a public/private key pair
+
+How they do this depends on whether they are using the command-line or GUI version of WireGuard. Once this is done, have 
+the user send their public key to you so you can install them on the server. 
+
+### Command-line
+
+To generate keys with the command-line, see [the WireGuard docs](https://www.wireguard.com/quickstart/#key-generation). 
+
+### GUI (Mac or Windows)
+
+To generate keys with the GUI, create a new tunnel by clicking on the `+` on the lower left of the GUI and select `Add 
+Empty Tunnel...`. You will see something like the following. Give the tunnel a name (e.g. MVP), and the save. 
+
 ![image](https://user-images.githubusercontent.com/311063/85208559-61b9a500-b2e6-11ea-9c2f-cea6515cb8ff.png)
 
-Once keys are
-generated users then generate a file like:
+## 3. Install the user on the server
+
+NOTE: Steps 3 and 4 can take place in parallel. 
+
+To install a user on the server, edit [the server config file](../ansible/templates/wg0.conf) adding a new `[Peer]` 
+section adding the user's public key and the unique IP address they were assigned in step 1 above. Be sure to add a 
+comment indicating what actual human the public key belongs to. Finally, to apply the changed config use Ansible:
+
+```
+ansible-playbook -i inventory_wg.yml -l master --tags=wg_config --ask-vault-pass playbook.yml
+```
+
+You can find the password for the Ansible vault in the `continu-k8.txt` file in our secrets bucket
+(`passwords.mvpstudio.org` bucket on GCE).
+
+Note that `inventory_wg.yml` is the same as `inventory.yml` but the IP addresses are the addresses that show up in the
+WireGuard tunnel. If you are on the OpenVpn tunnel use `inventory.yml` instead.
+
+Finally, create a pull request to check in the modified `wg0.conf` file.
+
+The user can now access the master server at 100.64.0.1 on the WireGuard network.
+
+## 4. Have the user create a client configuration
+
+The client configuration consists of the following text, with the users unique number replacing the `XXX` after 
+`Address`, and with their actual private key replacing `<private key here>`. 
 
 ```
 [Interface]
@@ -37,39 +90,37 @@ AllowedIPs = 100.64.0.1/32
 PersistentKeepalive = 25
 ```
 
+How the users create the configuration depends on whether they are using the command-line or GUI version of WireGuard. 
 
-There's only 2 lines that need changing:
+### Command-line
 
-1. The `XXX` after `Address` has to be changed to be **unique** across all MVP Studio users. You can figure out what the
-   next free address is by looking at [the server config file](../ansible/templates/wg0.conf).
-2. Replace `<private key here>` with your actual private key.
+To create the configuration for command-line users, create a text file with the above contents. 
 
-We then need to install that user's public key on the server. To do that edit [the server config
-file](../ansible/templates/wg0.conf) adding a new `[Peer]` section adding the user's public key and the unique IP
-address they were assigned in step (1) above. Be sure to add a comment indicating what actual human the public key
-belongs to. Finally, to apply the changed config use Ansible:
+### GUI (Mac or Windows)
 
+To create the configuration with the GUI, bring up the tunnel editor with the tunnel created in step 2. Then edit the 
+lower text area so it has the above contents. 
 
-```
-ansible-playbook -i inventory_wg.yml -l master --tags=wg_config --ask-vault-pass playbook.yml
-```
+## 5. Have the user test their connection to the server
 
-You can find the password for the Ansible vault in the `continu-k8.txt` file in our secrets bucket
-(`passwords.mvpstudio.org` bucket on GCE).
+The user can test their WireGuard connection with the following instructions:
 
-Note that `inventory_wg.yml` is the same as `inventory.yml` but the IP addresses are the addresses that show up in the
-WireGuard tunnel. If you are on the OpenVpn tunnel use `inventory.yml` instead.
+### Command-line
 
-Finally, create a pull request to check in the modified `wg0.conf` file.
+* Activate your connection with the command `wg-quick up /path/to/config.conf` where `/path/to/config.conf` is the 
+client configuration file you created in step 4. 
+* Test the connection to the master via `ping 100.64.0.1` - you should get timely responses.
+* Load the page https://100.64.0.1:8443 in your browser - it should load. You might get a warning about the certificate 
+not being up to date. You can ignore it. 
+* When done, deactivate the connection with the command `wg-quick down /path/to/config.conf`. 
 
-The master server now has IP address 100.64.0.1 on the WireGuard network.
+### GUI
 
-Users should be able to test their WireGuard configuration as follows:
-
-1. Bring up the interface: `wg-quick up /path/to/config.conf` where `/path/to/config.conf` is the client config file
-   described above. As above, Windows and OSX offer GUI clients for this if desired.
-2. Test the connection to the master via `ping 100.64.0.1` - you should get timely responses.
-3. When down, break down the tunnel using a GUI or `wg-quick down /path/to/config.conf`
+* Select the tunnel for MVP from the list on the left, and then press the `Activate` button. 
+* Test the connection to the master via `ping 100.64.0.1` - you should get timely responses.
+* Load the page https://100.64.0.1:8443 in your browser - it should load. You might get a warning about the certificate 
+not being up to date. You can ignore it. 
+* When done, break down the connection by pressing the `Deactivate` button. 
 
 # The OpenVpn VPN
 
