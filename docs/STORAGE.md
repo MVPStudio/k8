@@ -18,6 +18,17 @@ Our [Ansible scripts](../ansible/README.md) install the necessary iSCSI tools. T
 file](../ansible/inventory.yml) maps each host to a unique iSCSI target and the script then creates the corresponding
 connection. The iSCSI devices are left as raw block devices so they can be managed by Ceph.
 
+# Ceph Cluster Dashboard
+
+There is a dashboard that's run via the `rook-ceph-mgr-dashboard` service. To use it you can port-forward to it and then
+load it in a browser:
+
+```
+kubectl port-forward -n rook-ceph service/rook-ceph-mgr-dashboard 7000
+```
+
+And then point your browser at `localhost:7000`.
+
 
 ## Why Ceph
 
