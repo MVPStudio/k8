@@ -58,8 +58,10 @@ Installation instructions for the cli can be found
 
 Then run the following to navigate to the console:
 ```
-edgectl login --namespace=ambassador-edge 172.19.250.20:30037 
+edgectl login --namespace=ambassador-edge 100.64.0.1:30037 
 ```
+
+(or, if on the OpenVpn VPN subsitite `172.19.250.20:30037` the address you pass to edgectl.
 
 There is also an admin page built in to ambassador you can view.
 

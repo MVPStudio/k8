@@ -17,7 +17,7 @@ metadata:
 spec:
   hostname: mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+cert@gmail.com
 ---
 # redirect www.mvpstudio.org to mvpstudio.org
 apiVersion: getambassador.io/v2
@@ -39,4 +39,4 @@ metadata:
 spec:
   hostname: www.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+wwwcert@gmail.com
