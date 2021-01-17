@@ -26,5 +26,5 @@ metadata:
 spec:
   hostname: bringrecycling.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+bringrecycling@gmail.com
 ---
