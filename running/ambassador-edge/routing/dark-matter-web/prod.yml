@@ -51,7 +51,6 @@ metadata:
 spec:
   hostname: darkmatter.consulting
   acmeProvider:
-    email: darkmatteroregon@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host

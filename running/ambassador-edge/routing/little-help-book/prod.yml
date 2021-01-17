@@ -40,7 +40,7 @@ metadata:
 spec:
   hostname: littlehelpbook.com
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+helpbook@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -50,4 +50,4 @@ metadata:
 spec:
   hostname: littlehelpbook.prod.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+helpbookmvp@gmail.com

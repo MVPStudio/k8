@@ -48,6 +48,14 @@ Shows all the `Host` records that Ambassador is aware of and their status. Here 
 initial DNS errors so the initial SSL cert attempt failed. To fix it you can `kubectl delete -n ambassador-edge host
 eugene-food-scene-dns-host` and then re-apply the file that created the `Host` record to cause it to retry.
 
+IMPORTANT: don't use the same email for multiple services. If you do you'll get errors. There's a discussion in Slack
+about this and Oliver reported the bug to Ambassador (via their Slack - they don't have a public bug DB) but they didn't
+seem very interested in fixing it. So, instead, use the "gmail + trick" if you want to re-use an email address that's on
+another `Host` entry. For example, if you wanted to use `mvpstudiooregon@gmail.com` for a Host for `codechops.com` you'd
+instead use something like `mvpstudiooregon+codechops@gmail.com` because `mvpstudiooregon@gmail.com` is used elsewhere.
+That's still a valid `gmail` address - it'll just get a label automatically applied and that change is sufficient to
+keep Ambassador from throwing errors.
+
 
 ## Debugging
 

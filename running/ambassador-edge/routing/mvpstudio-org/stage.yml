@@ -17,4 +17,4 @@ metadata:
 spec:
   hostname: stage.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+mvpstage@gmail.com

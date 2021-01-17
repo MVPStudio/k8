@@ -16,7 +16,7 @@ metadata:
 spec:
   hostname: codechops.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+codechopsprod@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -36,7 +36,7 @@ metadata:
 spec:
   hostname: www.codechops.com
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+codechopsprodwww@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -56,4 +56,4 @@ metadata:
 spec:
   hostname: codechops.com
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+codechopsprodhost@gmail.com
