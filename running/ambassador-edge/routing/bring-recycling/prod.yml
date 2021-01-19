@@ -6,6 +6,7 @@ metadata:
 spec:
   host: bringrecycling.mvpstudio.org
   prefix: /api
+  rewrite: /api
   service: bring-recycling-webserver.prod-bring-recycling:5000
 ---
 apiVersion: getambassador.io/v2
