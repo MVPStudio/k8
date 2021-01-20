@@ -7,6 +7,12 @@ spec:
   host: codechops.mvpstudio.org
   prefix: /
   service: codechops-wp.codechops
+  # Set all the timeouts to 0 'cause when you do things like upgrade plugins in Wordpress
+  # the HTTP requests that give you the status of the upgrade just wait until the upgrade
+  # is complete which can be very slow.
+  timeout_ms: 0
+  idle_timeout_ms: 0
+  connect_timeout_ms: 0
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -27,6 +33,12 @@ spec:
   host: www.codechops.com
   prefix: /
   service: codechops-wp.codechops
+  # Set all the timeouts to 0 'cause when you do things like upgrade plugins in Wordpress
+  # the HTTP requests that give you the status of the upgrade just wait until the upgrade
+  # is complete which can be very slow.
+  timeout_ms: 0
+  idle_timeout_ms: 0
+  connect_timeout_ms: 0
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -47,6 +59,12 @@ spec:
   host: codechops.com
   prefix: /
   service: codechops-wp.codechops
+  # Set all the timeouts to 0 'cause when you do things like upgrade plugins in Wordpress
+  # the HTTP requests that give you the status of the upgrade just wait until the upgrade
+  # is complete which can be very slow.
+  timeout_ms: 0
+  idle_timeout_ms: 0
+  connect_timeout_ms: 0
 ---
 apiVersion: getambassador.io/v2
 kind: Host
