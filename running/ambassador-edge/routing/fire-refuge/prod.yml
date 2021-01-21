@@ -16,5 +16,5 @@ metadata:
 spec:
   hostname: firerefuge.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+firerefuge@gmail.com
 ---

@@ -18,7 +18,7 @@ metadata:
 spec:
   hostname: cardnightfever.prod.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+cardnightprod@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -51,7 +51,7 @@ metadata:
 spec:
   hostname: cardnightfever.com
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+cardnightrealprod@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -61,4 +61,4 @@ metadata:
 spec:
   hostname: www.cardnightfever.com
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+carnightprodwww@gmail.com

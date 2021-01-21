@@ -18,4 +18,4 @@ metadata:
 spec:
   hostname: test.emeraldcitizen.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+emeraldtest@gmail.com

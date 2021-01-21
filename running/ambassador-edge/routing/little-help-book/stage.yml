@@ -19,4 +19,4 @@ metadata:
 spec:
   hostname: littlehelpbook.stage.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+littlehelpstage@gmail.com

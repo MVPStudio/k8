@@ -18,7 +18,7 @@ metadata:
 spec:
   hostname: eugcal.prod.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+eugcal@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -51,7 +51,7 @@ metadata:
 spec:
   hostname: eugcal.com
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+eugcalprod@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -61,4 +61,4 @@ metadata:
 spec:
   hostname: www.eugcal.com
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+eugcalwww@gmail.com

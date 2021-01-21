@@ -18,4 +18,4 @@ metadata:
 spec:
   hostname: eugcal.stage.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+eugcalstage@gmail.com

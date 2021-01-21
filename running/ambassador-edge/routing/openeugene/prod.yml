@@ -17,7 +17,7 @@ metadata:
 spec:
   hostname: openeugene.prod.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+openeugeprod@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -53,7 +53,7 @@ metadata:
 spec:
   hostname: openeugene.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+openeugprodhost@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Host
@@ -63,4 +63,4 @@ metadata:
 spec:
   hostname: www.openeugene.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+openeugprodwww@gmail.com

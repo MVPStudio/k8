@@ -17,7 +17,7 @@ metadata:
 spec:
   hostname: helloworld.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+hello@gmail.com
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
@@ -37,4 +37,4 @@ metadata:
 spec:
   hostname: helloworld.prod.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+helloprod@gmail.com

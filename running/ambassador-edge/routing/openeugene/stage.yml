@@ -17,4 +17,4 @@ metadata:
 spec:
   hostname: openeugene.stage.apps.mvpstudio.org
   acmeProvider:
-    email: mvpstudiooregon@gmail.com
+    email: mvpstudiooregon+openeugstage@gmail.com
