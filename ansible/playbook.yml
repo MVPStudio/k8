@@ -61,6 +61,11 @@
        tags:
           - wg_config
        become: yes
+     - name: enable wireguard for auto-start on boot
+       command: sudo systemctl enable wg-quick@wg0.service
+       tags:
+          - wg_config
+       become: yes
      # Have to use command here because the systemd module will fail as wg-quick@wg0 isn't a real unit
      - name: start the wireguard service
        command: systemctl restart wg-quick@wg0
