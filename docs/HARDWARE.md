@@ -136,3 +136,33 @@ to persist that database.
 ```
 docker run -d --name rancher --restart=unless-stopped -v /opt/rancher:/var/lib/rancher -p 8080:80 -p 8443:443 rancher/rancher
 ```
+
+Then click on the cluster (the only cluster we have is `mvp-studio`) and click on `edit` in the "3 dots menu". That will
+bring up a bunch of configuration information. However, at the end of that information you'll also find a command you
+can run on each node to get them to join the cluster, install the kubelets, etc. It'll be something like:
+
+```
+sudo docker run -d --privileged --restart=unless-stopped --net=host -v /etc/kubernetes:/etc/kubernetes \
+    -v /var/run:/var/run rancher/rancher-agent:v2.5.5 --server https://172.19.250.22:8443 --token <some token here> \
+    --ca-checksum <some checksum here> --worker
+```
+
+### Upgrading Rancher
+
+The [upgrade
+directions](https://rancher.com/docs/rancher/v2.x/en/installation/other-installation-methods/single-node-docker/single-node-upgrades/)
+walk through upgrading a Docker-based setup like ours. Note that one step is the `--volumes-from` command but this isn't
+necessary for us since we volume mount the persistent data to `/opt/rancher`. Thus our upgrade is simpler:
+
+```
+# Stop the old container
+$ docker stop rancher
+# Make a backup of the data just in case
+$ sudo tar zcvf backup-v2.3.3.tar.gz /opt/rancher
+# And start the new version (2.5.5 in this case)
+$ docker run -d --restart=unless-stopped -p 8080:80 -p 8443:443 --privileged -v /opt/rancher:/var/lib/rancher \
+    rancher/rancher:v2.5.5
+```
+
+Note also that the port mappings for our cluster are a bit different - instead of `-p 80:80` and `-p 443:443` we use
+`-p 8080:80` and `-p 8443:443`.
