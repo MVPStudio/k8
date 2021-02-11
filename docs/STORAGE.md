@@ -27,7 +27,13 @@ load it in a browser:
 kubectl port-forward -n rook-ceph service/rook-ceph-mgr-dashboard 7000
 ```
 
-And then point your browser at `localhost:7000`.
+And then point your browser at `localhost:7000`. You can get the password for the dashboard via:
+
+```
+kubectl -n rook-ceph get secret rook-ceph-dashboard-password -o jsonpath="{['data']['password']}" | base64 --decode && echo
+```
+
+The username is `admin`.
 
 
 ## Why Ceph
