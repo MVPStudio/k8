@@ -8,6 +8,9 @@ spec:
   host: lhb-exporter.stage.apps.mvpstudio.org
   prefix: /
   service: exporter.little-help-book-stage
+  timeout_ms: 120000
+  idle_timeout_ms: 120000
+  connect_timeout_ms: 120000
 ---
 apiVersion: getambassador.io/v2
 kind: Host
