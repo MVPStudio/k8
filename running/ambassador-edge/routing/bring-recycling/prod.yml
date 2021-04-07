@@ -8,6 +8,7 @@ spec:
   prefix: /api
   rewrite: /api
   service: bring-recycling-webserver.prod-bring-recycling:5000
+  timeout_ms: 8000
 ---
 apiVersion: getambassador.io/v2
 kind: Mapping
