@@ -52,7 +52,7 @@ in the `boostrap` directory followed by `kubectl apply -f .` in the `running` di
 
 The cluster contains many components. These are documented is the following sub-documents:
 
-* [Ambassador](./docs/AMBASSADOR.md) is how we route all traffic in the cluster.
+* [Nginx Ingress](./docs/INGRESS.md) is how we route all traffic in the cluster.
 * [Hardware](./docs/HARDWARE.md) documents the hardware provided to us by Continu and how we've configured it.
 * [Storage](./docs/STORAGE.md) documentation on how we've configured the SAN array and created a
   [Ceph](https://docs.ceph.com/docs/master/start/intro/) cluster from it that can be used for persistent volumes.
