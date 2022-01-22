@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: prod-mvpstudio-org
+  namespace: prod-mvpstudio-web
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: cluster-certs
+spec:
+  tls:
+    - hosts:
+        - mvpstudio.org
+        - www.mvpstudio.org
+      secretName: prod-mvpstudio-org-cert
+  rules:
+    # mvpstudio.org website is the default route when no host is specified
+    - http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mvpstudio-web
+              servicePort: 80
+    - host: mvpstudio.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mvpstudio-web
+              servicePort: 80
+    - host: www.mvpstudio.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: mvpstudio-web
+              servicePort: 80

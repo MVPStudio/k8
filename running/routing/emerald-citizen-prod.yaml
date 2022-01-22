@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: emerald-citizen-prod
+  namespace: prod-emerald-citizen
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: cluster-certs
+spec:
+  tls:
+    - hosts:
+        - emeraldcitizen.org
+      secretName: emerald-citizen-prod-cert
+  rules:
+    - host: emeraldcitizen.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: web
+              servicePort: 80
