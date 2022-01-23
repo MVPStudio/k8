@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: dark-matter-web-prod
+  namespace: dark-matter-web-prod
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: cluster-certs
+    # Set big timeouts for websockets
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
+spec:
+  tls:
+    - hosts:
+        - darkmatter.prod.apps.mvpstudio.org
+        # if this gets switched over to mvp studio cluster uncomment this for https
+        #- www.darkmatter.consulting
+        #- darkmatter.consulting
+      secretName: dark-matter-web-prod-cert
+  rules:
+    - host: darkmatter.prod.apps.mvpstudio.org
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: dark-matter-web
+              servicePort: 80
+    # - host: www.darkmatter.consulting
+    #   http:
+    #     paths:
+    #       - path: /
+    #         backend:
+    #           serviceName: dark-matter-web
+    #           servicePort: 80
+    # - host: darkmatter.consulting
+    #   http:
+    #     paths:
+    #       - path: /
+    #         backend:
+    #           serviceName: dark-matter-web
+    #           servicePort: 80

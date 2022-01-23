@@ -84,7 +84,7 @@ PrivateKey = <private key here>
 ListenPort = 51820
 
 [Peer]
-Endpoint = 50.201.1.196:51820
+Endpoint = 67.59.93.160:51820
 PublicKey = zEEB7K7+iY4OOZTYffQI7s0xsC2bq6aO+B6RTs6BzVo=
 AllowedIPs = 100.64.0.1/32
 PersistentKeepalive = 25

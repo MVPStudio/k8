@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: offworld
+  namespace: offworld
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: cluster-certs
+    # Set all the timeouts to <really high> 'cause when you do things like upgrade plugins in Wordpress
+    # the HTTP requests that give you the status of the upgrade just wait until the upgrade
+    # is complete which can be very slow.
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
+spec:
+  tls:
+    - hosts:
+        - offworldevents.com
+        - www.offworldevents.com
+      secretName: hello-world-cert
+  rules:
+    - host: offworldevents.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wordpress
+              servicePort: 80
+    - host: www.offworldevents.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wordpress
+              servicePort: 80
